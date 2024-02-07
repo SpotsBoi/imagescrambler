@@ -40,6 +40,7 @@
 
                 function ScrambleImage(imageURL, password, unscramble) {
                     let testImage = new Image();
+                    testImage.crossOrigin = "";
                     testImage.src = imageURL;
 
                     testImage.onload = async function() {
