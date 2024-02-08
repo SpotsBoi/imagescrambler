@@ -1,3 +1,5 @@
+const COLOR_COMPONENTS = 4;
+
 window.onload = function() {
     // Get HTML elements.
     const imageURLContainer = document.getElementById("imageurlcontainer");
@@ -21,7 +23,7 @@ window.onload = function() {
     let useImageURL = true;
 
     function ScrambleImage(imageURL, password, iv, unscramble) {
-        // Create a new image..
+        // Create a new image.
         let targetImage = new Image();
 
         // Fetch the image.
@@ -90,7 +92,7 @@ window.onload = function() {
             // Turn the random numbers into pixel indices.
             randomNumbers = new Uint32Array(randomNumbers);
             for (let i = 0; i < randomNumbers.length; i++)
-                randomNumbers[i] = (randomNumbers[i] % pixelCount) * 4;
+                randomNumbers[i] = (randomNumbers[i] % pixelCount) * COLOR_COMPONENTS;
 
             // Scramble or unscramble the pixels.
             for (let j = pixelStart; j != pixelEnd; j += inc) {
