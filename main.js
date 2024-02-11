@@ -18,6 +18,10 @@ window.onload = function() {
 
     const scrambleButton = document.getElementById("scramblebutton");
     const unscrambleButton = document.getElementById("unscramblebutton");
+    const saveImageButton = document.getElementById("saveimagebutton");
+
+    const downloadLink = document.createElement("a");
+    downloadLink.download = "scrambledimage.png";
 
     const canvas = document.getElementById("imagecanvas");
     const context = canvas.getContext("2d");
@@ -25,6 +29,11 @@ window.onload = function() {
     // Global state
     let useImageURL = true;
     let blockSize = 1;
+
+    function UpdateBlockSize() {
+        blockSize = Math.pow(2, Math.floor(Math.log(parseInt(blockSizeSilder.value)) / Math.log(2)));
+        blockSizeText.innerHTML = "Block Size: " + blockSize;
+    }
 
     function BlockToPixelIndex(imageData, blockIndex) {
         let imageBlockWidth = imageData.width / blockSize;
@@ -177,10 +186,7 @@ window.onload = function() {
         useImageURL = true;
     }
 
-    blockSizeSilder.oninput = function() {
-        blockSize = Math.pow(2, Math.floor(Math.log(parseInt(blockSizeSilder.value)) / Math.log(2)));
-        blockSizeText.innerHTML = "Block Size: " + blockSize;
-    }
+    blockSizeSilder.oninput = UpdateBlockSize;
 
     scrambleButton.onclick = function() {
         ScrambleImage(imageURLInput.value, passwordInput.value, ivInput.value, false);
@@ -189,4 +195,11 @@ window.onload = function() {
     unscrambleButton.onclick = function() {
         ScrambleImage(imageURLInput.value, passwordInput.value, ivInput.value, true);
     }
+
+    saveImageButton.onclick = function() {
+        downloadLink.href = canvas.toDataURL("image/png");
+        downloadLink.click();
+    }
+
+    UpdateBlockSize();
 }
