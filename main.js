@@ -21,7 +21,7 @@ window.onload = function() {
     const saveImageButton = document.getElementById("saveimagebutton");
 
     const downloadLink = document.createElement("a");
-    downloadLink.download = "scrambledimage.png";
+    downloadLink.download = "imagescrambleroutput.png";
 
     const canvas = document.getElementById("imagecanvas");
     const context = canvas.getContext("2d");
@@ -31,7 +31,7 @@ window.onload = function() {
     let blockSize = 1;
 
     function UpdateBlockSize() {
-        blockSize = Math.pow(2, Math.floor(Math.log(parseInt(blockSizeSilder.value)) / Math.log(2)));
+        blockSize = Math.pow(2, parseInt(blockSizeSilder.value));
         blockSizeText.innerHTML = "Block Size: " + blockSize;
     }
 
