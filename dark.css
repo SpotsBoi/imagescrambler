@@ -41,7 +41,7 @@ button:hover {
     flex-direction: row;
 }
 
-.textentrybox {
+.flexcolumn {
     display: flex;
     flex-direction: column;
     align-items: center;
