@@ -31,7 +31,7 @@
 
             <div class="flexcolumn">
                 <p id="blocksizetext"></p>
-                <input type="range" id="blocksizesilder" name="blocksizesilder" min="0" max="3" value="0">
+                <input type="range" id="blocksizesilder" name="blocksizesilder" min="0" max="4" value="0">
             </div>
 
             <div class="flexrow">
@@ -59,7 +59,26 @@
 
             <div style="height: 10px;"></div>
 
-            <p></p>
+            <div style="width: 75%;">
+                <h2 style="text-align: center;">Notes</h2>
+                <ul>
+                    <li>Don't use this tool to hide any sensitive information. I'm just a hobbyist programmer and not a cryptographer, so I can't be sure if it's truly secure. There is more info on the possible weaknesses of this tool further down in the notes section.</li>
+                    <br>
+                    <li>The password and IV fields are both optional and either one or both can just be left blank. The IV field is essentially a second password that can be used to avoid the pitfall of two images being scrambled in the exact same way if they're the same size and use the same password. It's called "IV" because the text gets hashed and used as the <a href="https://en.wikipedia.org/wiki/Initialization_vector" target="_blank">initialization vector</a> in the AES algorithm when generating random numbers.</li>
+                    <br>
+                    <li>Lower block sizes obscure the image better, but result in larger file sizes and greater loss of color information if the image is compressed.</li>
+                    <br>
+                    <li>After scrambling an image, it must be saved and re-uploaded to be unscrambled. Scrambling an image and then immediately trying to unscramble it will just scramble it in a different order.</li>
+                    <br>
+                    <li>Specifying an image by URL will only work if the hosting website allows cross-origin requests.</li>
+                    <br>
+                    <li>Although scrambling an image will make it hard to visually identify it, there are other methods of identification that may still work. Since the pixel data is only rearranged without changing any of the colors, a histogram analysis of a scrambled image will give the same result as the original image. Compressing the scrambled image can throw off the colors significantly, but it may still be possible to identify it.</li>
+                    <br>
+                    <li>If the block size is set too large, it may become possible for a computer to unscramble the image by comparing the edges of the blocks.</li>
+                    <br>
+                    <li>The source code for this tool can be found on GitHub: <a href="https://github.com/SpotsBoi/imagescrambler" target="_blank">https://github.com/SpotsBoi/imagescrambler</a>.</li>
+                </ul>
+            </div>
         </div>
     </body>
 </html>
