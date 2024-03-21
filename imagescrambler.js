@@ -43,7 +43,7 @@ function SwapBlocks(imageData, block1, block2, blockSize) {
     }
 }
 
-async function ScrambleImage(targetImage, targetCanvas, password, unscramble, blockSize) {
+async function ScrambleImage(targetImage, targetCanvas, keyBytes, unscramble, blockSize) {
     const context = targetCanvas.getContext("2d");
 
     // Resize the canvas to fit the image.
@@ -66,9 +66,8 @@ async function ScrambleImage(targetImage, targetCanvas, password, unscramble, bl
     let blockCount = (targetCanvas.width * targetCanvas.height) / (blockSize * blockSize);
 
     // Hash the password.
-    let hashedPassword = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(password));
     let iv = new Uint8Array(IV_SIZE);
-    let key = await crypto.subtle.importKey("raw", hashedPassword, "AES-CBC", false, ["encrypt"]);
+    let key = await crypto.subtle.importKey("raw", keyBytes, "AES-CBC", false, ["encrypt"]);
 
     // Determine loop bounds and increments.
     let blockStart, blockEnd, inc;

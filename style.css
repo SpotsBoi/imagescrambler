@@ -54,3 +54,14 @@ button:hover {
     justify-content: center;
     padding: 5px;
 }
+
+.centercanvas {
+    display: block;
+    position: absolute;
+    margin: auto;
+    padding: 0px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}

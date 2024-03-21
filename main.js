@@ -16,9 +16,12 @@ window.onload = function() {
     const scrambleButton = document.getElementById("scramblebutton");
     const unscrambleButton = document.getElementById("unscramblebutton");
     const saveImageButton = document.getElementById("saveimagebutton");
+    const createLinkButton = document.getElementById("createlinkbutton");
 
     const downloadLink = document.createElement("a");
     downloadLink.download = "imagescrambleroutput.png";
+
+    const directLinkOutput = document.getElementById("directlinkoutput");
 
     const canvas = document.getElementById("imagecanvas");
 
@@ -57,8 +60,10 @@ window.onload = function() {
             alert("Failed to load image.");
         }
 
-        targetImage.onload = function() {
-            ScrambleImage(targetImage, canvas, passwordInput.value, unscramble, blockSizeGlobal);
+        targetImage.onload = async function() {
+            let hashedPassword = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(passwordInput.value));
+
+            ScrambleImage(targetImage, canvas, hashedPassword, unscramble, blockSizeGlobal);
         }
     }
 
@@ -93,6 +98,16 @@ window.onload = function() {
     saveImageButton.onclick = function() {
         downloadLink.href = canvas.toDataURL("image/png");
         downloadLink.click();
+    }
+
+    createLinkButton.onclick = async function() {
+        let hashedPassword = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(passwordInput.value));
+        hashedPassword = new Uint8Array(hashedPassword);
+
+        let blockSizeHex = blockSizeGlobal.toString(16);
+        if (blockSizeHex.length == 1) blockSizeHex = "0" + blockSizeHex;
+
+        directLinkOutput.innerHTML = window.location.href + "link#" + btoa(String.fromCharCode(...hashedPassword)) + blockSizeHex + imageURLInput.value;
     }
 
     UpdateBlockSize();
