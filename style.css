@@ -1,23 +1,29 @@
+:root {
+    color-scheme: light dark;
+    --text-color: light-dark(#333333, #cccccc);
+    --input-background-color: light-dark(#ccccd9, #333340);
+}
+
 body {
-    background-color: #151522;
+    background-color: light-dark(#eeeefb, #151522);
     margin: 0px;
-    color: #cccccc;
+    color: var(--text-color);
     font-family: sans-serif;
 }
 
 input[type=text], input[type=password] {
-    background-color: #333340;
+    background-color: var(--input-background-color);
     border: 0px;
     border-radius: 20px;
     padding: 12px;
     outline: none;
-    color: white;
+    color: var(--text-color);
     font-size: 20px;
 }
 
 button {
-    background-color: #333340;
-    color: #cccccc;
+    background-color: var(--input-background-color);
+    color: var(--text-color);
     border: 0px;
     border-radius: 10px;
     padding: 10px;
@@ -26,7 +32,7 @@ button {
 }
 
 button:hover {
-    background-color: #444450;
+    background-color: light-dark(#ddddea, #444450);
 }
 
 .maincontainer {

@@ -4,7 +4,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Image Scrambler</title>
-        <link rel="stylesheet" href="dark.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="imagescrambler.js"></script>
         <script src="main.js"></script>
     </head>
     <body>
@@ -39,10 +40,6 @@
                     <p>Password</p>
                     <input type="password" id="passwordinput">
                 </div>
-                <div class="flexcolumn">
-                    <p>IV</p>
-                    <input type="password" id="ivinput">
-                </div>
             </div>
 
             <div style="height: 5px;"></div>
@@ -63,8 +60,6 @@
                 <h2 style="text-align: center;">Notes</h2>
                 <ul>
                     <li>Don't use this tool to hide any sensitive information. I'm just a hobbyist programmer and not a cryptographer, so I can't be sure if it's truly secure. There is more info on the possible weaknesses of this tool further down in the notes section.</li>
-                    <br>
-                    <li>The password and IV fields are both optional and either one or both can just be left blank. The IV field is essentially a second password that can be used to avoid the pitfall of two images being scrambled in the exact same way if they're the same size and use the same password. It's called "IV" because the text gets hashed and used as the <a href="https://en.wikipedia.org/wiki/Initialization_vector" target="_blank">initialization vector</a> in the AES algorithm when generating random numbers.</li>
                     <br>
                     <li>Lower block sizes obscure the image better, but result in larger file sizes and greater loss of color information if the image is compressed.</li>
                     <br>

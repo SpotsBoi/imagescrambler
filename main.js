@@ -14,7 +14,6 @@ window.onload = function() {
     const blockSizeSilder = document.getElementById("blocksizesilder");
     
     const passwordInput = document.getElementById("passwordinput");
-    const ivInput = document.getElementById("ivinput");
 
     const scrambleButton = document.getElementById("scramblebutton");
     const unscrambleButton = document.getElementById("unscramblebutton");
@@ -77,7 +76,7 @@ window.onload = function() {
         }
     }
 
-    function ScrambleImage(imageURL, password, iv, unscramble) {
+    function ScrambleImage(imageURL, password, unscramble) {
         // Create a new image.
         let targetImage = new Image();
 
@@ -123,9 +122,9 @@ window.onload = function() {
 
             let blockCount = (canvas.width * canvas.height) / (blockSize * blockSize);
 
-            // Hash the password and IV.
+            // Hash the password.
             let hashedPassword = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(password));
-            let hashedIV = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(iv)));
+            let iv = new Uint8Array(16);
             let key = await crypto.subtle.importKey("raw", hashedPassword, "AES-CBC", false, ["encrypt"]);
 
             // Determine loop bounds and increments.
@@ -147,7 +146,7 @@ window.onload = function() {
             randomNumbers = await crypto.subtle.encrypt(
                 {
                     name: "AES-CBC",
-                    iv: hashedIV.subarray(0, 16),
+                    iv: iv,
                 },
                 key,
                 randomNumbers
@@ -189,11 +188,11 @@ window.onload = function() {
     blockSizeSilder.oninput = UpdateBlockSize;
 
     scrambleButton.onclick = function() {
-        ScrambleImage(imageURLInput.value, passwordInput.value, ivInput.value, false);
+        ScrambleImage(imageURLInput.value, passwordInput.value, false);
     }
 
     unscrambleButton.onclick = function() {
-        ScrambleImage(imageURLInput.value, passwordInput.value, ivInput.value, true);
+        ScrambleImage(imageURLInput.value, passwordInput.value, true);
     }
 
     saveImageButton.onclick = function() {
