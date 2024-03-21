@@ -1,5 +1,7 @@
 window.onload = function() {
     // Get HTML elements.
+    const themeButton = document.getElementById("themebutton");
+
     const imageURLContainer = document.getElementById("imageurlcontainer");
     const localFileContainer = document.getElementById("localfilecontainer");
     const imageURLInput = document.getElementById("imageurlinput");
@@ -28,6 +30,8 @@ window.onload = function() {
     // Global state
     let useImageURL = true;
     let blockSizeGlobal = 1;
+
+    let darkThemeEnabled = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
     function UpdateBlockSize() {
         blockSizeGlobal = Math.pow(2, parseInt(blockSizeSilder.value));
@@ -65,6 +69,13 @@ window.onload = function() {
 
             ScrambleImage(targetImage, canvas, hashedPassword, unscramble, blockSizeGlobal);
         }
+    }
+
+    themeButton.onclick = function() {
+        if (darkThemeEnabled) document.documentElement.style.colorScheme = "light";
+        else document.documentElement.style.colorScheme = "dark";
+
+        darkThemeEnabled = !darkThemeEnabled;
     }
 
     useLocalFileButton.onclick = function() {
