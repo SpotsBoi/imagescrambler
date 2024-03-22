@@ -14,6 +14,7 @@ window.onload = function() {
     const blockSizeSilder = document.getElementById("blocksizesilder");
     
     const passwordInput = document.getElementById("passwordinput");
+    const showHidePasswordButton = document.getElementById("showhidepasswordbutton");
 
     const scrambleButton = document.getElementById("scramblebutton");
     const unscrambleButton = document.getElementById("unscramblebutton");
@@ -30,8 +31,8 @@ window.onload = function() {
     // Global state
     let useImageURL = true;
     let blockSizeGlobal = 1;
-
     let darkThemeEnabled = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    let passwordHidden = true;
 
     function UpdateBlockSize() {
         blockSizeGlobal = Math.pow(2, parseInt(blockSizeSilder.value));
@@ -97,6 +98,18 @@ window.onload = function() {
     }
 
     blockSizeSilder.oninput = UpdateBlockSize;
+
+    showHidePasswordButton.onclick = function() {
+        if (passwordHidden) {
+            passwordInput.type = "text";
+            showHidePasswordButton.innerHTML = "Hide";
+        } else {
+            passwordInput.type = "password";
+            showHidePasswordButton.innerHTML = "Show";
+        }
+
+        passwordHidden = !passwordHidden;
+    }
 
     scrambleButton.onclick = function() {
         FetchAndScrambleImage(false);
