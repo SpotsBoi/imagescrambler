@@ -125,13 +125,15 @@ window.onload = function() {
     }
 
     createLinkButton.onclick = async function() {
-        let hashedPassword = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(passwordInput.value));
-        hashedPassword = new Uint8Array(hashedPassword);
-
-        let blockSizeHex = blockSizeGlobal.toString(16);
-        if (blockSizeHex.length == 1) blockSizeHex = "0" + blockSizeHex;
-
-        directLinkOutput.innerHTML = window.location.href + "link/#" + btoa(String.fromCharCode(...hashedPassword)) + blockSizeHex + imageURLInput.value;
+        if (useImageURL && imageURLInput.value !== "") {
+            let hashedPassword = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(passwordInput.value));
+            hashedPassword = new Uint8Array(hashedPassword);
+            
+            let blockSizeHex = blockSizeGlobal.toString(16);
+            if (blockSizeHex.length === 1) blockSizeHex = "0" + blockSizeHex;
+            
+            directLinkOutput.innerHTML = window.location.href + "link/#" + btoa(String.fromCharCode(...hashedPassword)) + blockSizeHex + imageURLInput.value;
+        }
     }
 
     UpdateBlockSize();

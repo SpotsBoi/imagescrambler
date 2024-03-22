@@ -99,7 +99,7 @@ async function ScrambleImage(targetImage, targetCanvas, keyBytes, unscramble, bl
         randomNumbers[i] = randomNumbers[i] % blockCount;
 
     // Scramble or unscramble the pixels.
-    for (let j = blockStart; j != blockEnd; j += inc) {
+    for (let j = blockStart; j !== blockEnd; j += inc) {
         SwapBlocks(imageData, j, randomNumbers[j], blockSize);
     }
 
