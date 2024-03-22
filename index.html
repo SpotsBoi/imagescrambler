@@ -66,19 +66,27 @@
             <div style="height: 10px;"></div>
 
             <div style="width: 75%;">
+                <h2 style="text-align: center;">How to Use</h2>
+                <ol>
+                    <li>Paste in a URL to an image or upload an image from your computer. Specifying an image by URL will only work if the hosting website allows cross-origin requests.</li>
+                    <br>
+                    <li>Choose a block size to use when scrambling or unscrambling the image. A block size of 1 will swap individual pixels while higher sizes will swap blocks of pixels. Lower block sizes obscure the image better, but result in larger file sizes and greater loss of color information if the image is compressed.</li>
+                    <br>
+                    <li>Type in a password (optional). Note that using the same password to scramble multiple images of the same size will cause them to be scrambled in the exact same way.</li>
+                    <br>
+                    <li>Scramble or unscramble the image. After scrambling an image, it must be saved and re-uploaded to be unscrambled. Scrambling an image and then immediately trying to unscramble it will just scramble it in a different order.</li>
+                    <br>
+                    <li>To create a direct link, paste in a URL to a scrambled image, enter the correct password and block size, then click the "Create Direct Link" button. Direct links will automatically unscramble the specified image and display it in the center of the screen like a normal image.</li>
+                </ol>
                 <h2 style="text-align: center;">Notes</h2>
                 <ul>
-                    <li>Don't use this tool to hide any sensitive information. I'm just a hobbyist programmer and not a cryptographer, so I can't be sure if it's truly secure. There is more info on the possible weaknesses of this tool further down in the notes section.</li>
-                    <br>
-                    <li>Lower block sizes obscure the image better, but result in larger file sizes and greater loss of color information if the image is compressed.</li>
-                    <br>
-                    <li>After scrambling an image, it must be saved and re-uploaded to be unscrambled. Scrambling an image and then immediately trying to unscramble it will just scramble it in a different order.</li>
-                    <br>
-                    <li>Specifying an image by URL will only work if the hosting website allows cross-origin requests.</li>
+                    <li>Don't use this tool to hide any sensitive information. I'm just a hobbyist programmer and not a cryptographer, so I can't be sure if it's truly secure. There is more info on the possible weaknesses of this tool below.</li>
                     <br>
                     <li>Although scrambling an image will make it hard to visually identify it, there are other methods of identification that may still work. Since the pixel data is only rearranged without changing any of the colors, a histogram analysis of a scrambled image will give the same result as the original image. Compressing the scrambled image can throw off the colors significantly, but it may still be possible to identify it.</li>
                     <br>
                     <li>If the block size is set too large, it may become possible for a computer to unscramble the image by comparing the edges of the blocks.</li>
+                    <br>
+                    <li>Passwords are hashed with SHA-256, so images scrambled with weak or common passwords will be vulnerable to dictionary attacks. When creating a direct link, the password is hashed and included in the URL, which also opens up the possibility of a rainbow table attack.</li>
                 </ul>
             </div>
         </div>
