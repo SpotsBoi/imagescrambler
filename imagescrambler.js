@@ -58,8 +58,7 @@ async function ScrambleImage(targetImage, targetCanvas, keyBytes, unscramble, bl
         targetCanvas.height = targetImage.height + blockSize - (targetImage.height % blockSize);
 
     // Get the image data.
-    context.fillStyle = "white";
-    context.fillRect(0, 0, targetCanvas.width, targetCanvas.height);
+    context.clearRect(0, 0, targetCanvas.width, targetCanvas.height);
     context.drawImage(targetImage, 0, 0);
     let imageData = context.getImageData(0, 0, targetCanvas.width, targetCanvas.height);
 
