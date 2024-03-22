@@ -118,7 +118,7 @@ window.onload = function() {
         let blockSizeHex = blockSizeGlobal.toString(16);
         if (blockSizeHex.length == 1) blockSizeHex = "0" + blockSizeHex;
 
-        directLinkOutput.innerHTML = window.location.href + "link#" + btoa(String.fromCharCode(...hashedPassword)) + blockSizeHex + imageURLInput.value;
+        directLinkOutput.innerHTML = window.location.href + "link/#" + btoa(String.fromCharCode(...hashedPassword)) + blockSizeHex + imageURLInput.value;
     }
 
     UpdateBlockSize();
