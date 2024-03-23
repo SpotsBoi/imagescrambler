@@ -64,9 +64,9 @@ async function ScrambleImage(targetImage, targetCanvas, keyBytes, unscramble, bl
 
     let blockCount = (targetCanvas.width * targetCanvas.height) / (blockSize * blockSize);
 
-    // Hash the password.
-    let iv = new Uint8Array(IV_SIZE);
+    // Create key and IV.
     let key = await crypto.subtle.importKey("raw", keyBytes, "AES-CBC", false, ["encrypt"]);
+    let iv = new Uint8Array(IV_SIZE);
 
     // Determine loop bounds and increments.
     let blockStart, blockEnd, inc;
